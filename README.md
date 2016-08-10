@@ -10,7 +10,7 @@ http://diy.haascnc.com/data-collection-using-rs-232-port-0
 - Better error management
 
 
-### Configuration File
+### Adapter Configuration File
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <Configuration>
