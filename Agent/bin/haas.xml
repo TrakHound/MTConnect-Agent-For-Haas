@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MTConnectDevices xmlns:m="urn:mtconnect.org:MTConnectDevices:1.1" xmlns="urn:mtconnect.org:MTConnectDevices:1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mtconnect.org:MTConnectDevices:1.1 http://www.mtconnect.org/schemas/MTConnectDevices_1.1.xsd">
+  <Header creationTime="2011-04-26T19:41:27Z" sender="mdc-Ubuntu" instanceId="1303739716" bufferSize="131072" version="1.1"/>
+  <Devices>
+    <Device id="Haas_Device" name="Haas_Device" uuid="Haas_Device">
+      <Description manufacturer="Haas"></Description>
+      <DataItems>
+        <DataItem category="EVENT" id="avail" name="avail" type="AVAILABILITY"/>
+      </DataItems>
+      <Components>
+        <Linear id="x1_01" name="X">
+          <DataItems>
+            <DataItem category="SAMPLE" id="x_act" name="x_act" nativeUnits="MILLIMETER" subType="ACTUAL" type="POSITION" units="MILLIMETER"/>
+          </DataItems>
+        </Linear>
+        <Linear id="y1_01" name="Y">
+          <DataItems>
+            <DataItem category="SAMPLE" id="y_act" name="y_act" nativeUnits="MILLIMETER" subType="ACTUAL" type="POSITION" units="MILLIMETER"/>
+          </DataItems>
+        </Linear>
+        <Linear id="z1_01" name="Z">
+          <DataItems>
+            <DataItem category="SAMPLE" id="z_act" name="z_act" nativeUnits="MILLIMETER" subType="ACTUAL" type="POSITION" units="MILLIMETER"/>
+          </DataItems>
+        </Linear>
+        <Rotary id="c1_01" name="C" nativeName="S">
+          <DataItems>
+            <DataItem category="SAMPLE" id="speed" name="speed" nativeUnits="REVOLUTION/MINUTE" subType="ACTUAL" type="ROTARY_VELOCITY" units="REVOLUTION/MINUTE"/>
+          </DataItems>
+        </Rotary>
+        <Controller id="controller1_01" name="Controller">
+          <DataItems>
+            <DataItem category="EVENT" id="estop" name="estop" type="EMERGENCY_STOP"/>
+            <DataItem category="EVENT" id="msg" name="msg" type="MESSAGE"/>
+			<DataItem category="CONDITION" id="zero_ret" name="zero_ret" type="SYSTEM"/>
+			<DataItem category="CONDITION" id="system" name="system" type="SYSTEM"/>
+          </DataItems>
+          <Components>
+            <Path id="path1_01" name="path">
+              <DataItems>
+                <DataItem category="EVENT" id="execution" name="execution" type="EXECUTION"/>
+                <DataItem category="EVENT" id="mode" name="mode" type="CONTROLLER_MODE"/>
+                <DataItem category="EVENT" id="program" name="program" type="PROGRAM"/>
+                <DataItem category="EVENT" id="part_count" name="part_count" type="PART_COUNT"/>
+              </DataItems>
+            </Path>
+          </Components>
+        </Controller>
+      </Components>
+    </Device>
+  </Devices>
+</MTConnectDevices>
