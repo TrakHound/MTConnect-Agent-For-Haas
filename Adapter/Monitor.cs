@@ -114,15 +114,13 @@ namespace MTConnect_Adapter_For_Haas
                         adapter.mExecution.Value = "ACTIVE";
                     }
                 }
-
-                //adapter.SendChanged();
             }
         }
 
 
         private void ProcessAvailability(string[] response)
         {
-            if (response.Length > 1) adapter.mAvail.Value = "AVAILABLE";
+            if (response != null && response.Length > 1) adapter.mAvail.Value = "AVAILABLE";
             else adapter.mAvail.Value = "UNAVAILABLE";
             adapter.SendChanged();
         }

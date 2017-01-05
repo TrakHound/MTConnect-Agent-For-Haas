@@ -11,16 +11,10 @@ namespace MTConnect_Adapter_For_Haas
 {
     public partial class Service1 : ServiceBase
     {
-        private Server server;
-
         public Service1()
         {
             InitializeComponent();
-
-            server = new Server();
         }
-
-        #region "Service"
 
         protected override void OnStart(string[] args)
         {
@@ -29,7 +23,7 @@ namespace MTConnect_Adapter_For_Haas
             serviceStatus.dwWaitHint = 10000;
             SetServiceStatus(this.ServiceHandle, ref serviceStatus);
 
-            if (server != null) server.Start();
+            Program.Start();
 
             // Update the service state to Running.
             serviceStatus.dwCurrentState = ServiceState.SERVICE_RUNNING;
@@ -43,7 +37,7 @@ namespace MTConnect_Adapter_For_Haas
             serviceStatus.dwWaitHint = 10000;
             SetServiceStatus(this.ServiceHandle, ref serviceStatus);
 
-            if (server != null) server.Stop();
+            Program.Stop();
 
             // Update the service state to Stopped.
             serviceStatus.dwCurrentState = ServiceState.SERVICE_STOPPED;
@@ -75,7 +69,5 @@ namespace MTConnect_Adapter_For_Haas
 
         [DllImport("advapi32.dll", SetLastError = true)]
         private static extern bool SetServiceStatus(IntPtr handle, ref ServiceStatus serviceStatus);
-
-        #endregion
     }
 }
