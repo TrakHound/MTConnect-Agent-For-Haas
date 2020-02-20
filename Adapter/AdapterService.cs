@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2016 Feenux LLC, All Rights Reserved.
+﻿// Copyright (c) 2020 TrakHound Inc., All Rights Reserved.
 
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
@@ -7,11 +7,11 @@ using System;
 using System.Runtime.InteropServices;
 using System.ServiceProcess;
 
-namespace MTConnect_Adapter_For_Haas
+namespace MTConnect.Adapters.Haas
 {
-    public partial class Service1 : ServiceBase
+    public partial class AdapterService : ServiceBase
     {
-        public Service1()
+        public AdapterService()
         {
             InitializeComponent();
         }

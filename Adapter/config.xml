@@ -9,10 +9,11 @@
     <Port>7885</Port>
 
     <!-- Adapter heartbeat -->
-    <Heartbeat>1000</Heartbeat>
+    <Heartbeat>500</Heartbeat>
 
     <!-- COM Port to communicate with the Haas machine -->
-    <COMPort>COM3</COMPort>
+    <EthernetServer>localhost</EthernetServer>
+    <EthernetPort>5051</EthernetPort>
 
   </Device>
 </Configuration>

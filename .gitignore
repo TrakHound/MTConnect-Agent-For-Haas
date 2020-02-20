@@ -21,6 +21,7 @@ bld/
 Adapter/[Bb]in/
 [Oo]bj/
 [Ll]og/
+[Ii]nstaller/
 
 # Visual Studio 2015 cache/options directory
 .vs/

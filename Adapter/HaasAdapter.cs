@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2016 Feenux LLC, All Rights Reserved.
+﻿// Copyright (c) 2020 TrakHound Inc., All Rights Reserved.
 
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
@@ -6,7 +6,7 @@
 using MTConnect;
 using System;
 
-namespace MTConnect_Adapter_For_Haas
+namespace MTConnect.Adapters.Haas
 {
     public class HaasAdapter
     {
@@ -64,8 +64,8 @@ namespace MTConnect_Adapter_For_Haas
 
         private void AddDataItems()
         {
-            AddConditions();
             AddEvents();
+            AddConditions();
             AddSamples();
         }
 
@@ -75,13 +75,17 @@ namespace MTConnect_Adapter_For_Haas
             mZeroRet.DevicePrefix = configuration.DeviceName;
             adapter.AddDataItem(mZeroRet);
 
-            mSystem = new Condition("system");
+            mSystem = new Condition("system", true);
             mSystem.DevicePrefix = configuration.DeviceName;
             adapter.AddDataItem(mSystem);
         }
 
         private void AddEvents()
         {
+            mAvail = new Event("avail");
+            mAvail.DevicePrefix = configuration.DeviceName;
+            adapter.AddDataItem(mAvail);
+
             mMessage = new Event("msg");
             mMessage.DevicePrefix = configuration.DeviceName;
             adapter.AddDataItem(mMessage);
@@ -105,10 +109,6 @@ namespace MTConnect_Adapter_For_Haas
             mMode = new Event("mode");
             mMode.DevicePrefix = configuration.DeviceName;
             adapter.AddDataItem(mMode);
-
-            mAvail = new Event("avail");
-            mAvail.DevicePrefix = configuration.DeviceName;
-            adapter.AddDataItem(mAvail);
         }
 
         private void AddSamples()
@@ -124,6 +124,10 @@ namespace MTConnect_Adapter_For_Haas
             mZact = new Sample("z_act");
             mZact.DevicePrefix = configuration.DeviceName;
             adapter.AddDataItem(mZact);
+
+            mSpindleSpeed = new Sample("speed");
+            mSpindleSpeed.DevicePrefix = configuration.DeviceName;
+            adapter.AddDataItem(mSpindleSpeed);
         }
 
     }

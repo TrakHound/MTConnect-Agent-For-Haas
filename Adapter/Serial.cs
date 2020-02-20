@@ -8,11 +8,10 @@ using System.Collections.Generic;
 using System.IO.Ports;
 using System.Threading;
 
-namespace MTConnect_Adapter_For_Haas
+namespace MTConnect.Adapters.Haas
 {
     public static class Serial
     {
-
         public static string[] SendCommand(string cmd, string port)
         {
             string[] result = null;
@@ -38,7 +37,6 @@ namespace MTConnect_Adapter_For_Haas
 
                 // Read response
                 string response = serial.ReadExisting();
-                //string response = serial.ReadTo("\r\n");
 
                 // Split string and return array of response values
                 var list = new List<string>();
@@ -63,6 +61,5 @@ namespace MTConnect_Adapter_For_Haas
 
             return result;
         }
-
     }
 }

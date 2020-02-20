@@ -7,7 +7,7 @@
     <ProjectGuid>{C93DDB9E-4A57-488E-BF54-F32702784993}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MTConnect_Adapter_For_Haas</RootNamespace>
+    <RootNamespace>MTConnect.Adapters.Haas</RootNamespace>
     <AssemblyName>MTConnect-Adapter-For-Haas</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -44,6 +44,7 @@
     <Reference Include="System.configuration" />
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -54,15 +55,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DeviceConfiguration.cs" />
+    <Compile Include="Ethernet.cs" />
     <Compile Include="HaasAdapter.cs" />
-    <Compile Include="Monitor.cs" />
-    <Compile Include="Serial.cs" />
-    <Compile Include="Server.cs" />
-    <Compile Include="Service1.cs">
+    <Compile Include="EthernetMonitor.cs" />
+    <Compile Include="ProjectInstaller.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Service1.Designer.cs">
-      <DependentUpon>Service1.cs</DependentUpon>
+    <Compile Include="ProjectInstaller.Designer.cs">
+      <DependentUpon>ProjectInstaller.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SerialMonitor.cs" />
+    <Compile Include="Serial.cs" />
+    <Compile Include="Server.cs" />
+    <Compile Include="AdapterService.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AdapterService.Designer.cs">
+      <DependentUpon>AdapterService.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -74,6 +83,11 @@
     <Content Include="config.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ProjectInstaller.resx">
+      <DependentUpon>ProjectInstaller.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,13 +1,13 @@
-﻿// Copyright (c) 2016 Feenux LLC, All Rights Reserved.
+﻿// Copyright (c) 2020 TrakHound Inc., All Rights Reserved.
 
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
 using System;
 
-namespace MTConnect_Adapter_For_Haas
+namespace MTConnect.Adapters.Haas
 {
-    partial class Monitor
+    partial class SerialMonitor
     {
         const int HEARTBEAT = 1000;
 
@@ -19,7 +19,7 @@ namespace MTConnect_Adapter_For_Haas
 
         private HaasAdapter adapter;
 
-        public Monitor(DeviceConfiguration config)
+        public SerialMonitor(DeviceConfiguration config)
         {
             configuration = config;
             comPort = config.COMPort;

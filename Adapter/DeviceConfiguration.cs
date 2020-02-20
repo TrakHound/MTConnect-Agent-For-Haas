@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2016 Feenux LLC, All Rights Reserved.
+﻿// Copyright (c) 2020 TrakHound Inc., All Rights Reserved.
 
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
@@ -9,12 +9,18 @@ using System.IO;
 using System.Reflection;
 using System.Xml;
 
-namespace MTConnect_Adapter_For_Haas
+namespace MTConnect.Adapters.Haas
 {
     public class DeviceConfiguration
     {
         public string DeviceName { get; set; }
+
         public int Port { get; set; }
+
+        public string EthernetServer { get; set; }
+
+        public int EthernetPort { get; set; }
+
         public int Heartbeat { get; set; }
 
         public string COMPort { get; set; }
@@ -95,6 +101,5 @@ namespace MTConnect_Adapter_For_Haas
 
             return result;
         }
-
     }
 }

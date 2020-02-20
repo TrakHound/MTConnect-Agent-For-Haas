@@ -91,13 +91,13 @@ xmlns:msxsl="urn:schemas-microsoft-com:xslt"
 				  
 					<div class="row">
 					
-						<p class="col-md-3 text-muted">This template is designed by Feenux LLC and is available for use through the MIT license.</p>
+						<p class="col-md-3 text-muted">This template is designed by TrakHound Inc. and is available for use through the MIT license.</p>
 						
 						<p class="col-md-3 text-muted">Source code for this template is available at 
 							<a href="https://github.com/TrakHound/MTConnect-Agent-Stylesheet">GitHub</a>
 						</p>
 					
-						<p class="col-md-3 text-muted">© 2016 Feenux LLC, All Rights Reserved</p>
+						<p class="col-md-3 text-muted">© 2020 TrakHound Inc., All Rights Reserved</p>
 
 					</div>
 

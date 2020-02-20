@@ -88,13 +88,13 @@ xmlns:m="urn:mtconnect.org:MTConnectDevices:1.3"
 				  
 					<div class="row">
 					
-						<p class="col-md-3 text-muted">This template is designed by Feenux LLC and is available for use through the MIT license.</p>
+						<p class="col-md-3 text-muted">This template is designed by TrakHound Inc. and is available for use through the MIT license.</p>
 						
 						<p class="col-md-3 text-muted">Source code for this template is available at 
 							<a href="https://github.com/TrakHound/MTConnect-Agent-Stylesheet">GitHub</a>
 						</p>
 					
-						<p class="col-md-3 text-muted">© 2016 Feenux LLC, All Rights Reserved</p>
+						<p class="col-md-3 text-muted">© 2020 TrakHound Inc., All Rights Reserved</p>
 
 					</div>
 
@@ -142,7 +142,13 @@ xmlns:m="urn:mtconnect.org:MTConnectDevices:1.3"
 				</div>
 						
 			</div>
-			
+
+			<div class="panel-body">
+
+				<xsl:apply-templates select="m:DataItems"/>
+				
+			</div>
+
 			<div class="panel-body">
 			
 				<xsl:apply-templates select="m:Components"/>
@@ -214,7 +220,7 @@ xmlns:m="urn:mtconnect.org:MTConnectDevices:1.3"
 		</div>
 	
 	</xsl:template>
-	
+		
 	<xsl:template match="m:Components">
 		
 		<div class="panel-group">
