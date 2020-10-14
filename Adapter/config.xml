@@ -11,7 +11,7 @@
     <!-- Adapter heartbeat -->
     <Heartbeat>500</Heartbeat>
 
-    <!-- COM Port to communicate with the Haas machine -->
+    <!-- Ethernet settings to communicate with the Haas machine -->
     <EthernetServer>localhost</EthernetServer>
     <EthernetPort>5051</EthernetPort>
 
