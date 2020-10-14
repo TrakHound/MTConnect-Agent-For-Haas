@@ -44,7 +44,7 @@ namespace MTConnect.Adapters.Haas
                 for (var x = 1; x <= values.Length - 1; x++)
                 {
                     string val = values[x].Trim();
-                    if (!String.IsNullOrEmpty(val)) list.Add(val);
+                    if (!string.IsNullOrEmpty(val)) list.Add(val);
                 }
 
                 result = list.ToArray();

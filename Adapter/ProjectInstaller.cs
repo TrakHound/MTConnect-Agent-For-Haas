@@ -14,5 +14,10 @@ namespace MTConnect.Adapters.Haas
         {
             InitializeComponent();
         }
+
+        private void AdapterServiceInstaller_AfterInstall(object sender, InstallEventArgs e)
+        {
+
+        }
     }
 }

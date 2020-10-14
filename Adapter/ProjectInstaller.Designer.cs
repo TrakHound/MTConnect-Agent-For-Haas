@@ -42,6 +42,7 @@
             this.AdapterServiceInstaller.DisplayName = "MTConnect-Adapter-for-Haas";
             this.AdapterServiceInstaller.ServiceName = "MTConnect-Adapter-for-Haas";
             this.AdapterServiceInstaller.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
+            this.AdapterServiceInstaller.AfterInstall += new System.Configuration.Install.InstallEventHandler(this.AdapterServiceInstaller_AfterInstall);
             // 
             // ProjectInstaller
             // 

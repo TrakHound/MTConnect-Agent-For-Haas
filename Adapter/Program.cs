@@ -4,6 +4,7 @@
 // file 'LICENSE.txt', which is part of this source code package.
 
 using System;
+using System.Net;
 using System.ServiceProcess;
 using System.Configuration.Install;
 using System.Reflection;
@@ -52,8 +53,25 @@ namespace MTConnect.Adapters.Haas
             }
         }
 
+        private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+
+        }
+
+        private static void CurrentDomain_ProcessExit(object sender, EventArgs e)
+        {
+            Stop();
+        }
+
         public static void Start()
         {
+            AppDomain.CurrentDomain.ProcessExit += CurrentDomain_ProcessExit;
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+
+            ServicePointManager.DefaultConnectionLimit = 1000;
+            ServicePointManager.Expect100Continue = true;
+            System.Threading.ThreadPool.SetMinThreads(100, 4);
+
             server = new Server();
             server.Start();
         }

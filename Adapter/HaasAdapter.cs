@@ -3,13 +3,14 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
-using MTConnect;
-using System;
+using NLog;
 
 namespace MTConnect.Adapters.Haas
 {
     public class HaasAdapter
     {
+        private static Logger log = LogManager.GetCurrentClassLogger();
+
         // Conditions
         public Condition mZeroRet;
         public Condition mSystem;
@@ -58,7 +59,7 @@ namespace MTConnect.Adapters.Haas
         public void SendChanged()
         {
             if (adapter != null) adapter.SendChanged();
-            else Console.WriteLine("Error Sending Changed DataItems");
+            else log.Warn("Error Sending Changed DataItems");
         }
 
 
@@ -129,6 +130,5 @@ namespace MTConnect.Adapters.Haas
             mSpindleSpeed.DevicePrefix = configuration.DeviceName;
             adapter.AddDataItem(mSpindleSpeed);
         }
-
     }
 }

@@ -3,6 +3,7 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -29,6 +30,8 @@ namespace MTConnect.Adapters.Haas
 
     public class Configuration
     {
+        private static Logger log = LogManager.GetCurrentClassLogger();
+
         public Configuration() { Devices = new List<DeviceConfiguration>(); }
 
         public List<DeviceConfiguration> Devices { get; set; }
@@ -66,11 +69,11 @@ namespace MTConnect.Adapters.Haas
                         }
                     }
 
-                    Console.WriteLine("Configuration Successfully Read From : " + path);
+                    log.Info("Configuration Successfully Read From : " + path);
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Error During Configuration Read :: " + path);
+                    log.Error("Error During Configuration Read :: " + path);
                 }
             }
 
@@ -87,12 +90,12 @@ namespace MTConnect.Adapters.Haas
                 {
                     if (child.InnerText != "")
                     {
-                        Type o = typeof(DeviceConfiguration);
+                        var o = typeof(DeviceConfiguration);
                         PropertyInfo info = o.GetProperty(child.Name);
 
                         if (info != null)
                         {
-                            Type t = info.PropertyType;
+                            var t = info.PropertyType;
                             info.SetValue(result, Convert.ChangeType(child.InnerText, t), null);
                         }
                     }

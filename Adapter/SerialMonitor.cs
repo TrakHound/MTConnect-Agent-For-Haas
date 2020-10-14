@@ -98,12 +98,12 @@ namespace MTConnect.Adapters.Haas
                     {
                         adapter.mExecution.Value = "STOPPED";
 
-                        adapter.mSystem.Add(MTConnect.Condition.Level.FAULT, "Alarm on indicator");
+                        adapter.mSystem.Add(Condition.Level.FAULT, "Alarm on indicator");
                     }
                     else
                     {
                         adapter.mEstop.Value = "ARMED";
-                        adapter.mSystem.Add(MTConnect.Condition.Level.NORMAL);
+                        adapter.mSystem.Add(Condition.Level.NORMAL);
                     }
 
                 }
@@ -152,8 +152,8 @@ namespace MTConnect.Adapters.Haas
         {
             switch (response)
             {
-                case "(ZERO RET)": adapter.mZeroRet.Add(MTConnect.Condition.Level.FAULT, "NO ZERO X"); break;
-                default: adapter.mZeroRet.Add(MTConnect.Condition.Level.NORMAL); break;
+                case "(ZERO RET)": adapter.mZeroRet.Add(Condition.Level.FAULT, "NO ZERO X"); break;
+                default: adapter.mZeroRet.Add(Condition.Level.NORMAL); break;
             }
 
             adapter.SendChanged();

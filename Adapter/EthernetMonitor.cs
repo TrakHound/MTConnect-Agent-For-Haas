@@ -3,7 +3,9 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
+using NLog;
 using System;
+using System.Text.RegularExpressions;
 
 namespace MTConnect.Adapters.Haas
 {
@@ -11,7 +13,9 @@ namespace MTConnect.Adapters.Haas
     {
         const int HEARTBEAT = 500;
 
-        System.Timers.Timer requestTimer;
+        private static Logger log = LogManager.GetCurrentClassLogger();
+
+        private System.Timers.Timer requestTimer;
 
         private DeviceConfiguration configuration;
 
@@ -70,7 +74,7 @@ namespace MTConnect.Adapters.Haas
             var response = ethernet.SendCommand("?Q100");
             if (!string.IsNullOrEmpty(response))
             {
-                Console.WriteLine("Q100 : " + response);
+                log.Info("Q100 : " + response);
 
                 ProcessAvailability(response);
             }
@@ -81,7 +85,7 @@ namespace MTConnect.Adapters.Haas
             string response = ethernet.SendCommand("?Q104");
             if (!string.IsNullOrEmpty(response))
             {
-                Console.WriteLine("Q104 : " + response);
+                log.Info("Q104 : " + response);
 
                 ProcessControllerMode(response);
                 ProcessZeroReturn(response);
@@ -93,7 +97,7 @@ namespace MTConnect.Adapters.Haas
             string response = ethernet.SendCommand("?Q500");
             if (!string.IsNullOrEmpty(response))
             {
-                Console.WriteLine("Q500 : " + response);
+                log.Info("Q500 : " + response);
 
                 ProcessExecution(response);
                 ProcessEmergencyStop(response);
@@ -106,7 +110,7 @@ namespace MTConnect.Adapters.Haas
         private void ProcessAvailability(string response)
         {
             var pattern = "^>SERIAL NUMBER, (.*)$";
-            var match = new System.Text.RegularExpressions.Regex(pattern).Match(response);
+            var match = new Regex(pattern).Match(response);
             if (match.Success) adapter.mAvail.Value = "AVAILABLE";
             else adapter.mAvail.Value = "UNAVAILABLE";
 
@@ -116,7 +120,7 @@ namespace MTConnect.Adapters.Haas
         private void ProcessExecution(string response)
         {
             var pattern = "^>PROGRAM, .*, (.*), PARTS, [0-9]*$";
-            var match = new System.Text.RegularExpressions.Regex(pattern).Match(response);
+            var match = new Regex(pattern).Match(response);
             if (match.Success && match.Groups.Count > 1)
             {
                 var val = match.Groups[1].ToString();
@@ -126,7 +130,7 @@ namespace MTConnect.Adapters.Haas
             }
 
             pattern = "^>STATUS (.*)$";
-            match = new System.Text.RegularExpressions.Regex(pattern).Match(response);
+            match = new Regex(pattern).Match(response);
             if (match.Success && match.Groups.Count > 1)
             {
                 var val = match.Groups[1].ToString();
@@ -139,14 +143,14 @@ namespace MTConnect.Adapters.Haas
         private void ProcessEmergencyStop(string response)
         {
             var pattern = "^>PROGRAM, .*, (.*), PARTS, [0-9]*$";
-            var match = new System.Text.RegularExpressions.Regex(pattern).Match(response);
+            var match = new Regex(pattern).Match(response);
             if (match.Success && match.Groups.Count > 1)
             {
                 var val = match.Groups[1].ToString();
                 if (val == "ALARM ON")
                 {
                     adapter.mEstop.Value = "TRIGGERED";
-                    adapter.mSystem.Add(MTConnect.Condition.Level.FAULT, "Alarm on indicator");
+                    adapter.mSystem.Add(Condition.Level.FAULT, "Alarm on indicator");
                 }
                 else
                 {
@@ -166,7 +170,7 @@ namespace MTConnect.Adapters.Haas
         private void ProcessProgramName(string response)
         {
             var pattern = "^>PROGRAM, (.*), .*, PARTS, [0-9]*$";
-            var match = new System.Text.RegularExpressions.Regex(pattern).Match(response);
+            var match = new Regex(pattern).Match(response);
             if (match.Success && match.Groups.Count > 1)
             {
                 var val = match.Groups[1].ToString();
@@ -180,7 +184,7 @@ namespace MTConnect.Adapters.Haas
         private void ProcessPartCount(string response)
         {
             var pattern = "^>PROGRAM, .*, .*, PARTS, ([0-9]*)$";
-            var match = new System.Text.RegularExpressions.Regex(pattern).Match(response);
+            var match = new Regex(pattern).Match(response);
             if (match.Success && match.Groups.Count > 1)
             {
                 adapter.mPartCount.Value = match.Groups[1].ToString();
@@ -191,7 +195,7 @@ namespace MTConnect.Adapters.Haas
         private void ProcessControllerMode(string response)
         {
             var pattern = "^>MODE, (.*)$";
-            var match = new System.Text.RegularExpressions.Regex(pattern).Match(response);
+            var match = new Regex(pattern).Match(response);
             if (match.Success && match.Groups.Count > 1)
             {
                 var val = match.Groups[1].ToString();
@@ -210,14 +214,14 @@ namespace MTConnect.Adapters.Haas
         private void ProcessZeroReturn(string response)
         {
             var pattern = "^>MODE, (.*)$";
-            var match = new System.Text.RegularExpressions.Regex(pattern).Match(response);
+            var match = new Regex(pattern).Match(response);
             if (match.Success && match.Groups.Count > 1)
             {
                 var val = match.Groups[1].ToString();
                 switch (val)
                 {
-                    case "(ZERO RET)": adapter.mZeroRet.Add(MTConnect.Condition.Level.FAULT, "NO ZERO X"); break;
-                    default: adapter.mZeroRet.Add(MTConnect.Condition.Level.NORMAL); break;
+                    case "(ZERO RET)": adapter.mZeroRet.Add(Condition.Level.FAULT, "NO ZERO X"); break;
+                    default: adapter.mZeroRet.Add(Condition.Level.NORMAL); break;
                 }
 
                 adapter.SendChanged();
@@ -239,10 +243,10 @@ namespace MTConnect.Adapters.Haas
             string response = ethernet.SendCommand("?Q600 " + variable);
             if (!string.IsNullOrEmpty(response))
             {
-                Console.WriteLine("Q600 : " + variable.ToString() + " : " + response);
+                log.Info("Q600 : " + variable.ToString() + " : " + response);
 
                 var pattern = "^>MACRO, (.*)$";
-                var match = new System.Text.RegularExpressions.Regex(pattern).Match(response);
+                var match = new Regex(pattern).Match(response);
                 if (match.Success && match.Groups.Count > 1)
                 {
                     return match.Groups[1].ToString();

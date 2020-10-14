@@ -3,13 +3,15 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
-using System;
+using NLog;
 using System.Collections.Generic;
 
 namespace MTConnect.Adapters.Haas
 {
     public class Server
     {
+        private static Logger log = LogManager.GetCurrentClassLogger();
+
         private List<SerialMonitor> serialMonitors = new List<SerialMonitor>();
         private List<EthernetMonitor> ethernetMonitors = new List<EthernetMonitor>();
 
@@ -24,13 +26,13 @@ namespace MTConnect.Adapters.Haas
                     {
                         var monitor = new SerialMonitor(device);
                         serialMonitors.Add(monitor);
-                        Console.WriteLine("Serial Monitor Created");
+                        log.Info("Serial Monitor Created");
                     }
                     else
                     {
                         var monitor = new EthernetMonitor(device);
                         ethernetMonitors.Add(monitor);
-                        Console.WriteLine("Ethernet Monitor Created : " + device.EthernetServer + " : " + device.EthernetPort + " : " + device.DeviceName);
+                        log.Info("Ethernet Monitor Created : " + device.EthernetServer + " : " + device.EthernetPort + " : " + device.DeviceName);
                     }
                 }
             }
