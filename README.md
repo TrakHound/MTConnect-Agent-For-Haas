@@ -31,6 +31,7 @@ http://diy.haascnc.com/data-collection-using-rs-232-port-0
 	
   </Device>
 </Configuration>
+```
 
 ### RS232 Adapter Configuration File
 ```xml
